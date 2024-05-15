@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block contenido %}
+
+<main class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1 class="text-center display-3  py-4">Ver Cursos</h1>
+
+  <ul class="list-group">
+    {% for cursos in lista_de_cursos %}
+    <li class="list-group-item">
+      {% if user.is_authenticated %}
+      <a class="list-group-item" href="{% url 'detalles_cursos' cursos.id %}">
+        <header class="d-flex justify-content-between">
+            <h2>{{cursos.nombre}}</h2>
+        <p>{{cursos.descripcion}}</p>
+        <p>{{cursos.duracion}}</p>
+        <p>{{cursos.link}}</p>
+        <p>{{cursos.creador}}</p>
+        <p>{{cursos.usuario.username}}</p>
+      </a>
+      {% else %}
+      <h2>{{cursos.nombre}}</h2>
+      <p>{{cursos.descripcion}}</p>
+      <p>{{cursos.duracion}}</p>
+      <a target="_blank" href="{{cursos.link}}">Link</a>
+      <p>{{cursos.creador}}</p>
+      <p>{{cursos.usuario.username}}</p>
+      {% endif %}
+        </header>
+    </li>
+    {% endfor %}
+  </ul>
+  </div>
+</main>
+
+{% endblock %}
